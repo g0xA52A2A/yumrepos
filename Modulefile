@@ -1,0 +1,10 @@
+name          'gbrown-yumrepos'
+version       '0.0.1'
+author        'George Brown'
+license       'MIT'
+summary       'Adds yumrepos from parameters'
+description   'Module for configuring yum repos agnostically'
+project_page  'github.com/george-b/yumrepos'
+
+# Dependencies
+dependency 'puppetlabs/stdlib'
