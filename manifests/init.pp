@@ -2,23 +2,23 @@
 
 class yumrepos
 (
-$defaults   = {enabled => '1'},
+$defaults   = { ensure => present, enabled => '1' },
 $repos      = undef,
 $hiera_hash = false,
 )
 
 {
 
-# Ensure we are operating on a boolean
+  # Ensure we are operating on a boolean
 
   validate_bool($hiera_hash)
 
-# If hiera is used as an ENC the $repos parameter it will only be
-# defined as the first matching value. As such check if the user wants
-# a hash across hierarchies and define variable in the manifest.
-#
-# $yumrepos is used as an interim as puppet does not allow us to
-# reassign variables
+  # If hiera is used as an ENC the $repos parameter it will only be
+  # defined as the first matching value. As such check if the user wants
+  # a hash across hierarchies and define variable in the manifest.
+  #
+  # $yumrepos is used as an interim as puppet does not allow us to
+  # reassign variables
 
   if $hiera_hash == true {
     $yumrepos = hiera_hash('yumrepos::repos')
@@ -27,16 +27,15 @@ $hiera_hash = false,
     $yumrepos = $repos
   }
 
-# Ensure we are operating on a hash.
+  # Ensure we are operating on a hash.
 
-  validate_hash($defaults)
-  validate_hash($yumrepos)
+  validate_hash($defaults, $yumrepos)
 
   create_resources(yumrepo, $yumrepos, $defaults)
 
-# Ensure keys are present
-# No import exec is performed as the puppet yum proivder runs with the '-y'
-# flag so keys are automatically accepted anyway
+  # Ensure keys are present
+  # No import exec is performed as the puppet yum proivder runs with the '-y'
+  # flag so keys are automatically accepted anyway
 
   file { '/etc/pki/rpm-gpg':
   ensure  => directory,
