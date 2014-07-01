@@ -12,19 +12,22 @@ This has a dependency on the puppetlabs/stdlib for validation checks.
 Simply throw the `$repos` parameter a nested hash of repos
 and stop writing yumrepo modules.
 
-If the `$heria_hash` parameter is true values for $repos across all hierarchies
-are used so repos can be defined at multiple levels.
+If the `$heria_hash` parameter is true values for `$repos` across all
+hierarchies are used so repos can be defined at multiple levels.
 This allows for a base set of repos to be defined at a low level of the
 hierarchy and more specific repos to be defined further up the hierarchy
 closer to what is likely more relevant definitions.
 
-There is also a $defaults parameter intended to minimise boiler plate.
+There is also a `$defaults` parameter intended to minimise boiler plate.
 This enables default attributes to be set once and applied for all puppet
 defined yumrepos. In this module this is set to ensure the repo is enabled.
 Handy if you have to proxy all your repos or something for example.
 
-If the attribute is defined in both $repos and $defaults the value in
+If the attribute is defined in both `$repos` and `$defaults` the value in
 `$repos` takes precedence.
+
+The `$purge` parameter takes a boolean, if true all yumrepos and rpm-gpg keys
+will be purged unless they are provided by puppet. This defaults to false.
 
 Usage
 -----
