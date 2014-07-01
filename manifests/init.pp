@@ -5,13 +5,14 @@ class yumrepos
 $defaults   = { ensure => present, enabled => '1' },
 $repos      = undef,
 $hiera_hash = false,
+$purge      = false,
 )
 
 {
 
-  # Ensure we are operating on a boolean
+  # Ensure we are operating on a booleans
 
-  validate_bool($hiera_hash)
+  validate_bool($hiera_hash, $pruge)
 
   # If hiera is used as an ENC the $repos parameter it will only be
   # defined as the first matching value. As such check if the user wants
@@ -33,13 +34,19 @@ $hiera_hash = false,
 
   create_resources(yumrepo, $yumrepos, $defaults)
 
+  resources { 'yumrepos':
+    pruge => $purge,
+  }
+
   # Ensure keys are present
   # No import exec is performed as the puppet yum proivder runs with the '-y'
   # flag so keys are automatically accepted anyway
 
   file { '/etc/pki/rpm-gpg':
   ensure  => directory,
+  purge   => $pruge,
   recurse => true,
+  force   => true,
   owner   => 'root',
   group   => 'root',
   source  => 'puppet:///modules/yumrepos/'
