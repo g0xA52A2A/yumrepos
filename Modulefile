@@ -7,4 +7,4 @@ description   'Module for configuring yum repos agnostically'
 project_page  'http://github.com/george-b/yumrepos'
 
 # Dependencies
-dependency 'puppetlabs/stdlib'
+dependency 'puppetlabs/stdlib', '>=3.0.0'
