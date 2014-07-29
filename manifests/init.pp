@@ -12,7 +12,7 @@ $purge      = false,
 
   # Ensure we are operating on a booleans
 
-  validate_bool($hiera_hash, $pruge)
+  validate_bool($hiera_hash, $purge)
 
   # If hiera is used as an ENC the $repos parameter it will only be
   # defined as the first matching value. As such check if the user wants
