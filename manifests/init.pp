@@ -2,7 +2,7 @@
 
 class yumrepos
 (
-$defaults   = { ensure => present, enabled => '1' },
+$defaults   = { enabled => '1' },
 $repos      = undef,
 $hiera_hash = false,
 $purge      = false,
@@ -34,8 +34,8 @@ $purge      = false,
 
   create_resources(yumrepo, $yumrepos, $defaults)
 
-  resources { 'yumrepos':
-    pruge => $purge,
+  resources { 'yumrepo':
+    purge => $purge,
   }
 
   # Ensure keys are present
@@ -44,7 +44,7 @@ $purge      = false,
 
   file { '/etc/pki/rpm-gpg':
   ensure  => directory,
-  purge   => $pruge,
+  purge   => $purge,
   recurse => true,
   force   => true,
   owner   => 'root',
