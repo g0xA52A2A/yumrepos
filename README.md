@@ -12,7 +12,7 @@ This has a dependency on the puppetlabs/stdlib for validation checks.
 Simply throw the `$repos` parameter a nested hash of repos
 and stop writing yumrepo modules.
 
-If the `$heria_hash` parameter is true values for `$repos` across all
+If the `$hiera_hash` parameter is true values for `$repos` across all
 hierarchies are used so repos can be defined at multiple levels.
 This allows for a base set of repos to be defined at a low level of the
 hierarchy and more specific repos to be defined further up the hierarchy
@@ -67,5 +67,5 @@ $defaults = {
 }
 ```
 
-You can provide keys by dropping them into the files directory of this module
+You can provide keys by specifying `gpg_source` to point to a puppet fileserver.
 
