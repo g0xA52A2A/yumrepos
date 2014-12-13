@@ -6,6 +6,7 @@ $defaults   = { enabled => '1' },
 $repos      = undef,
 $hiera_hash = false,
 $purge      = false,
+$gpg_source = 'puppet:///modules/yumrepos/',
 )
 
 {
@@ -49,7 +50,7 @@ $purge      = false,
   force   => true,
   owner   => 'root',
   group   => 'root',
-  source  => 'puppet:///modules/yumrepos/'
+  source  => $gpg_source,
   }
 
 }
