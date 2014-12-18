@@ -2,13 +2,13 @@
 
 class yumrepos
 (
-$defaults   = { enabled => '1' },
-$repos      = undef,
-$hiera_hash = false,
-$purge      = false,
-)
-
-{
+  $defaults   = $yumrepos::params::defaults,
+  $repos      = $yumrepos::params::repos,
+  $hiera_hash = $yumrepos::params::hiera_hash,
+  $purge      = $yumrepos::params::purge,
+  $keysource  = $yumrepos::params::keysource,
+  $keydir     = $yumrepos::params::keydir
+) inherits yumrepos::params {
 
   # Ensure we are operating on a booleans
 
@@ -42,14 +42,14 @@ $purge      = false,
   # No import exec is performed as the puppet yum proivder runs with the '-y'
   # flag so keys are automatically accepted anyway
 
-  file { '/etc/pki/rpm-gpg':
+  file { $keydir:
   ensure  => directory,
   purge   => $purge,
   recurse => true,
   force   => true,
   owner   => 'root',
   group   => 'root',
-  source  => 'puppet:///modules/yumrepos/'
+  source  => $keysource
   }
 
 }
